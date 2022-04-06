@@ -1,5 +1,8 @@
 <h1>Admin Dashboard</h1>
 
 <p>Number of categories: <%= @categories.length %></p>
-<p>Number of products: <%= @products.length %></p>
+<p>Number of <%= link_to "products", products_path %>: <%= @products.length %></p>
 
+<% @categories.each do |category| %>
+  <p>Number of products in category <%= link_to category.name, category_path(category) %>: <%= @products.where(category_id: category.id).count %></p>
+<% end %>
