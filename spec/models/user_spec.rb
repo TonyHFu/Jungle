@@ -41,4 +41,29 @@ RSpec.describe User, type: :model do
 			@user.errors.full_messages,
 		).to include "Password confirmation doesn't match Password"
 	end
+
+	it 'should have unique emails' do
+		@user_1 =
+			User.new(
+				first_name: 'bob',
+				last_name: 'builder',
+				email: 'bob@BUILDER.com',
+				password: '123456',
+				password_confirmation: '123456',
+			)
+		@user_1.save!
+
+		@user_2 =
+			User.new(
+				first_name: 'bob',
+				last_name: 'builder',
+				email: 'BOB@builder.com',
+				password: '123456',
+				password_confirmation: '123456',
+			)
+		@user_2.save
+		expect(
+			@user_2.errors.full_messages,
+		).to include 'Email has already been taken'
+	end
 end
