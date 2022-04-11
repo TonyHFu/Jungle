@@ -167,5 +167,19 @@ RSpec.describe User, type: :model do
 			user = User.authenticate_with_credentials('bob@builder.com', '12345')
 			expect(user).to be_nil
 		end
+
+		it 'should still be able to login with white-space', focus: true do
+			@user =
+				User.new(
+					first_name: 'bob',
+					last_name: 'builder',
+					email: 'bob@builder.com',
+					password: '123456',
+					password_confirmation: '123456',
+				)
+			@user.save!
+			user = User.authenticate_with_credentials('  bob@builder.com  ', '123456')
+			expect(user).to be_an_instance_of User
+		end
 	end
 end
