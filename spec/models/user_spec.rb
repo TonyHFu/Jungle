@@ -126,5 +126,46 @@ RSpec.describe User, type: :model do
 	end
 
 	describe '.authenticate_with_credentials' do
+		it 'should not login with nil password' do
+			@user =
+				User.new(
+					first_name: 'bob',
+					last_name: 'builder',
+					email: 'bob@builder.com',
+					password: '123456',
+					password_confirmation: '123456',
+				)
+			@user.save!
+			user = User.authenticate_with_credentials 'bob@builder.com', nil
+			expect(user).to be_nil
+		end
+
+		it 'should be able to login with the right password' do
+			@user =
+				User.new(
+					first_name: 'bob',
+					last_name: 'builder',
+					email: 'bob@builder.com',
+					password: '123456',
+					password_confirmation: '123456',
+				)
+			@user.save!
+			user = User.authenticate_with_credentials('bob@builder.com', '123456')
+			expect(user).to be_an_instance_of User
+		end
+
+		it 'should not be able to login with the wrong password' do
+			@user =
+				User.new(
+					first_name: 'bob',
+					last_name: 'builder',
+					email: 'bob@builder.com',
+					password: '123456',
+					password_confirmation: '123456',
+				)
+			@user.save!
+			user = User.authenticate_with_credentials('bob@builder.com', '12345')
+			expect(user).to be_nil
+		end
 	end
 end
