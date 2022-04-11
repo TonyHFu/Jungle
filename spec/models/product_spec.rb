@@ -56,5 +56,18 @@ RSpec.describe Product, type: :model do
 		@product.save
 		expect(@product.errors.full_messages).to include "Quantity can't be blank"
 	end
-	it 'validates category is present'
+	it 'validates category is present' do
+		@category = Category.new(name: 'pets')
+		@category.save!
+		@product =
+			Product.new(
+				name: 'doge',
+				description: "it's a dog",
+				category: @nil,
+				quantity: 15,
+				price: 1500,
+			)
+		@product.save
+		expect(@product.errors.full_messages).to include "Category can't be blank"
+	end
 end
