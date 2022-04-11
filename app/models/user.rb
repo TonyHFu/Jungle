@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	validates :last_name, presence: true
 
 	def self.authenticate_with_credentials(email, password)
-		user = User.find_by_email(email.strip)
+		user = User.where('lower(email) = ?', email.downcase.strip).first
 		return user if user && user.authenticate(password)
 		nil
 	end
