@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
 		if order.valid?
 			@user = current_user
-			OrderMailer.order_confirmation(@user).deliver_later
+			OrderMailer.order_confirmation(@user, order).deliver_later
 			empty_cart!
 			redirect_to order, notice: 'Your Order has been placed.'
 		else

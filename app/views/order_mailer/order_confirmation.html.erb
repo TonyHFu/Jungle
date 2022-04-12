@@ -1,12 +1,39 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Thank you for your order, <%= @user.first_name %></h1>
-    <p>
-      
-    </p>
-  </body>
-</html>
+<style>
+  th {
+    text-align: left
+    padding: 5px;
+  }
+  td {
+    padding: 10px;
+  }
+</style>
+
+<h1>Thank you for your order, <%= @user.first_name %></h1>
+
+<table>
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% subtotal = 0 %>
+        <% @order.line_items.each do |item| %>
+          <%= render 'order', item: item %>
+          <% subtotal += item.total_price_cents%>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4">
+            TOTAL:
+          </th>
+          <th>
+            <%= humanized_money_with_symbol subtotal / 100.0 %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>

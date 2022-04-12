@@ -1,1 +1,10 @@
 Thank you for your order, <%= @user.first_name %>
+<% subtotal = 0 %>
+<% @order.line_items.each do |item| %>
+  <% product =  Product.find(item.product_id) %>
+  Item: <%= product.name %> | Quantity: <%= item.quantity%> | Subtotal: <%= humanized_money_with_symbol product.price * item.quantity %>
+  <% subtotal += product.price * item.quantity%>
+
+<% end %>
+
+Total: <%= humanized_money_with_symbol subtotal%>
