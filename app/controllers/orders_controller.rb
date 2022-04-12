@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
 		order = create_order(charge)
 
 		if order.valid?
+			@user = current_user
+			OrderMailer.order_confirmation(@user).deliver_later
 			empty_cart!
 			redirect_to order, notice: 'Your Order has been placed.'
 		else
