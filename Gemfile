@@ -61,3 +61,9 @@ group :production do
 end
 
 gem 'chartkick'
+
+group :test do
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner'
+end
