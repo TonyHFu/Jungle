@@ -25,7 +25,7 @@ RSpec.feature 'Adds product to cart', type: :feature, js: true do
 
 		# VERIFY
 		expect(page).to have_css 'article.product', count: 10
-		page.has_content?('My Cart (0)')
+		expect(page.has_content?('My Cart (0)')).to be true
 
 		# ACT
 		find('.product footer form', match: :first).click
@@ -34,6 +34,6 @@ RSpec.feature 'Adds product to cart', type: :feature, js: true do
 		save_screenshot
 
 		# VERIFY
-		page.has_content?('My Cart (1)')
+		expect(page.has_content?('My Cart (1)')).to be true
 	end
 end
