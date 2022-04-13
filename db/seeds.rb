@@ -155,4 +155,35 @@ cat3.products.create!(
 	},
 )
 
+puts 'Re-creating users'
+
+User.destroy_all
+
+10.times do |n|
+	password = Faker::Internet.password
+	User.create!(
+		first_name: Faker::Name.first_name,
+		last_name: Faker::Name.last_name,
+		email: Faker::Internet.email,
+		password: password,
+		password_confirmation: password,
+	)
+end
+
+puts 'Re-creating reviews'
+
+Review.destroy_all
+
+Product.all.each do |product|
+	3.times do |n|
+		user = User.order('RANDOM()').first
+		Review.create!(
+			user: user,
+			product: product,
+			rating: rand(6),
+			body: Faker::Quotes::Shakespeare.hamlet_quote,
+		)
+	end
+end
+
 puts 'DONE!'
