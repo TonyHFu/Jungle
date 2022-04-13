@@ -186,4 +186,14 @@ Product.all.each do |product|
 	end
 end
 
+puts 'Creating admin user'
+
+User.create!(
+	first_name: 'admin',
+	last_name: 'admin',
+	email: 'admin@admin.com',
+	password: '123456',
+	password_confirmation: '123456',
+)
+
 puts 'DONE!'
