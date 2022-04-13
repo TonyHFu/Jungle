@@ -53,7 +53,6 @@ RSpec.describe Order, type: :model do
 		)
 
 		@order.save!
-		@order.adjust_quantity
 
 		@product1.reload
 		@product2.reload

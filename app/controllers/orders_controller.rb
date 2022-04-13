@@ -55,7 +55,6 @@ class OrdersController < ApplicationController
 		end
 
 		order.save!
-		order.adjust_quantity
 		order
 	end
 end
