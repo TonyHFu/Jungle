@@ -26,10 +26,20 @@
       </div>
     </div>
 
+    <div class="new-review">
+      <%= form_for :review do |f| %>
+        Rating: <%= f.select :rating, [[0, 0],[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
+        Review: <%= f.text_area :review %>
+
+        <%= f.submit %>
+      <% end %>
+    </div>
+
     <div class="row reviews">
       <h4>Reviews:</h4>
       <%= render @reviews %>
     </div>
+
 
   </article>
 

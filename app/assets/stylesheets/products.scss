@@ -82,5 +82,16 @@ main section.products-show {
 			padding: 10px;
 			margin-bottom: 10px;
 		}
+		.new-review form {
+			display: flex;
+			flex-direction: column;
+
+			#review_rating {
+				width: 50px;
+			}
+			input[type="submit"] {
+				width: 100px;
+			}
+		}
 	}
 }
