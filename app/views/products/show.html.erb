@@ -26,14 +26,17 @@
       </div>
     </div>
 
-    <div class="new-review">
-      <%= form_for :review, url: product_reviews_path(@product) do |f| %>
-        Rating: <%= f.select :rating, [[0, 0],[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
-        Review: <%= f.text_area :body %>
+    <% if current_user %>
+      <div class="new-review">
+        <%= form_for :review, url: product_reviews_path(@product) do |f| %>
+       
+          Rating: <%= f.select :rating, [[0, 0],[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
+          Review: <%= f.text_area :body %>
 
-        <%= f.submit %>
-      <% end %>
-    </div>
+          <%= f.submit %>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="row reviews">
       <h4>Reviews:</h4>
