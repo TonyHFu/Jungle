@@ -23,7 +23,7 @@ RSpec.describe Order, type: :model do
 			)
 	end
 
-	it 'deduct quantity from products based on their line item quantities' do
+	it 'deduct quantity from products based on their line item quantities and do not affect others' do
 		stripe_charge =
 			Stripe::Charge.create(
 				source: 'tok_visa',
